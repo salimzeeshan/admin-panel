@@ -14,7 +14,7 @@ function AllRoutes() {
       <Route path="/signup" element={<Signup />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/add" element={<AddRecord />}></Route>
-      <Route path="/edit" element={<EditRecord />}></Route>
+      <Route path="/update" element={<EditRecord />}></Route>
       <Route path="*" element={<PageNotFound />}></Route>
     </Routes>
   );
