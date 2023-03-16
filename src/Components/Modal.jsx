@@ -3,7 +3,6 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Text,
@@ -17,7 +16,7 @@ function UserModal(modal) {
       <ModalContent>
         <ModalHeader>{modal.fname}'s details</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
+        <ModalBody mb={4}>
           <Text>
             <strong>User ID:</strong> {modal.userID}
           </Text>
@@ -29,7 +28,7 @@ function UserModal(modal) {
           </Text>
         </ModalBody>
 
-        <ModalFooter></ModalFooter>
+        {/* <ModalFooter></ModalFooter> */}
       </ModalContent>
     </Modal>
   );

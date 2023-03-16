@@ -26,7 +26,7 @@ function AddRecord() {
   const navigate = useNavigate();
 
   async function getData() {
-    const response = await store.getState();
+    const response = await store.getState().userReducer;
     setLastID(response[response.length - 1].id);
   }
 

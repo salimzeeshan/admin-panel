@@ -16,10 +16,10 @@ import { updateUser } from "../Redux/Actions/actions";
 
 function AddRecord() {
   const [error, setError] = useState("");
-  const [defaultFName, setDefaultFName] = useState('')
-  const [defaultLName, setDefaultLName] = useState('')
-  const [defaultEmail, setDefaultEmail] = useState('')
-  const [defaultID, setDefaultID] = useState('')
+  const [defaultFName, setDefaultFName] = useState("");
+  const [defaultLName, setDefaultLName] = useState("");
+  const [defaultEmail, setDefaultEmail] = useState("");
+  const [defaultID, setDefaultID] = useState("");
   const fNameRef = useRef();
   const lNameRef = useRef();
   const idRef = useRef();
@@ -62,10 +62,10 @@ function AddRecord() {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("currentDetails"));
     const { first_name, last_name, email, id } = user;
-    setDefaultFName(first_name)
-    setDefaultLName(last_name)
-    setDefaultEmail(email)
-    setDefaultID(id)
+    setDefaultFName(first_name);
+    setDefaultLName(last_name);
+    setDefaultEmail(email);
+    setDefaultID(id);
   }, []);
 
   return (
@@ -106,7 +106,11 @@ function AddRecord() {
         <Flex gap={3}>
           <Flex w={"20%"} flexDirection={"column"}>
             <FormLabel>ID</FormLabel>
-            <Input isReadOnly value={defaultID} ref={idRef} type={"number"}></Input>
+            <Input
+              isReadOnly
+              value={defaultID}
+              ref={idRef}
+              type={"number"}></Input>
           </Flex>
           <Flex w={"80%"} flexDirection={"column"}>
             <FormLabel>Email Address</FormLabel>

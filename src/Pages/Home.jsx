@@ -2,7 +2,6 @@ import {
   Center,
   Heading,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Th,
@@ -30,8 +29,9 @@ function Home() {
   const dispatch = useDispatch();
 
   async function getData() {
-    const response = await store.getState();
+    const response = await store.getState().userReducer;
     setData(response);
+    console.log(response);
   }
 
   useEffect(() => {
@@ -39,7 +39,7 @@ function Home() {
   }, [dataState]);
 
   return (
-    <Center px={"30px"} gap={12} flexDir={"column"} w={"100%"} mt={12}>
+    <Center pb={"60px"} px={"30px"} gap={12} flexDir={"column"} w={"100%"} mt={12}>
       <Heading color={"#333"}>List of Users</Heading>
       <ConfirmDeleteModal
         setDataState={setDataState}
@@ -57,41 +57,43 @@ function Home() {
       />
       <TableContainer>
         <Table variant="simple">
-          <TableCaption>USERS</TableCaption>
           <Thead>
             <Tr>
               <Th isNumeric>ID</Th>
               <Th>First Name</Th>
               <Th>Last Name</Th>
               <Th>Email</Th>
+              <Th>Birthday</Th>
               <Th>View</Th>
               <Th>Edit</Th>
               <Th>Delete</Th>
             </Tr>
           </Thead>
           <Tbody>
-            {data &&
-              data.map((user) => {
-                return (
-                  <UserTable
-                    setDeleteID={setDeleteID}
-                    dataState={dataState}
-                    setDataState={setDataState}
-                    dispatch={dispatch}
-                    setFName={setFName}
-                    setLName={setLName}
-                    setEmail={setEmail}
-                    setuserID={setuserID}
-                    onOpen={onOpen}
-                    deleteModal={deleteModal}
-                    key={user.id}
-                    id={user.id}
-                    first_name={user.first_name}
-                    last_name={user.last_name}
-                    email={user.email}
-                  />
-                );
-              })}
+            {data
+              ? data.map((user) => {
+                  return (
+                    <UserTable
+                      setDeleteID={setDeleteID}
+                      dataState={dataState}
+                      setDataState={setDataState}
+                      dispatch={dispatch}
+                      setFName={setFName}
+                      setLName={setLName}
+                      setEmail={setEmail}
+                      setuserID={setuserID}
+                      onOpen={onOpen}
+                      deleteModal={deleteModal}
+                      key={user.id}
+                      id={user.id}
+                      first_name={user.first_name}
+                      last_name={user.last_name}
+                      email={user.email}
+                      birthday={user.birthday}
+                    />
+                  );
+                })
+              : null}
           </Tbody>
         </Table>
       </TableContainer>

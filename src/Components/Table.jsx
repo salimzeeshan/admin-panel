@@ -1,20 +1,10 @@
 import { Tr, Td, Button } from "@chakra-ui/react";
 import { BsEyeFill, BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { deleteUser } from "../Redux/Actions/actions";
 
 function UserTable(user) {
-  const {
-    setFName,
-    setLName,
-    setEmail,
-    setuserID,
-    dispatch,
-    setDataState,
-    dataState,
-    deleteModal,
-    setDeleteID,
-  } = user;
+  const { setFName, setLName, setEmail, setuserID, deleteModal, setDeleteID } =
+    user;
   const navigate = useNavigate();
 
   const handleView = () => {
@@ -48,6 +38,7 @@ function UserTable(user) {
         <Td>{user.first_name}</Td>
         <Td>{user.last_name}</Td>
         <Td>{user.email}</Td>
+        <Td>{user.birthday}</Td>
         <Td>
           <Button bgColor={"#A6E3E9"} onClick={handleView}>
             <BsEyeFill />

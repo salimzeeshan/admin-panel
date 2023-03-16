@@ -1,4 +1,15 @@
-const userReducer = (state, action) => {
+import axios from "axios";
+import { combineReducers } from "redux";
+
+var data = axios
+  .get("https://reqres.in/api/users?per_page=5")
+  .then((response) => {
+    response = response.data.data;
+    response = response.map((user) => ({ ...user, birthday: `${user.id}/02/2020` }));
+    return response;
+  });
+
+const userReducer = (state = data, action) => {
   switch (action.type) {
     case "ADD":
       var user = action.payload;
@@ -17,12 +28,30 @@ const userReducer = (state, action) => {
   }
 };
 
+const authReducer = (state = false, action) => {
+  switch (action.type) {
+    case "LOGIN":
+      state = true;
+      return state;
+    case "LOGOUT":
+      state = false;
+      return state;
+    default:
+      return state;
+  }
+};
+
+const rootReducer = combineReducers({
+  userReducer,
+  authReducer,
+});
+
 const updateUser = async (state, user) => {
   var response = await state;
   console.log(user);
   for (let i = 0; i < response.length; i++) {
     if (user.id == response[i].id) {
-      var old_user = response[i]
+      var old_user = response[i];
     }
   }
 
@@ -48,4 +77,4 @@ const deleteUser = async (state, id) => {
   return new_data;
 };
 
-export default userReducer;
+export default rootReducer;
