@@ -15,6 +15,7 @@ import UserTable from "../Components/Table";
 import UserModal from "../Components/Modal";
 import { useDispatch } from "react-redux";
 import ConfirmDeleteModal from "../Components/ConfirmDelete";
+import Notification from "../Components/Notification.jsx";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -27,11 +28,27 @@ function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const deleteModal = useDisclosure();
   const dispatch = useDispatch();
+  const [birthday, setBirthday] = useState([]);
 
   async function getData() {
     const response = await store.getState().userReducer;
+    const date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let currentDate = `${+day <= 9 ? `0${day}` : day}/${
+      +month <= 9 ? `0${month}` : month
+    }/${year}`;
+    response.map((user) => {
+      if (user.birthday === currentDate) {
+        const birthdayList = [...birthday];
+        birthdayList.push(user);
+        console.log(birthdayList);
+        setBirthday(birthdayList);
+      }
+    });
     setData(response);
-    console.log(response);
   }
 
   useEffect(() => {
@@ -39,7 +56,16 @@ function Home() {
   }, [dataState]);
 
   return (
-    <Center pb={"60px"} px={"30px"} gap={12} flexDir={"column"} w={"100%"} mt={12}>
+    <Center
+      pb={"60px"}
+      px={"30px"}
+      gap={12}
+      flexDir={"column"}
+      w={"100%"}
+      mt={12}>
+      <Notification
+        birthday = {birthday}
+      />
       <Heading color={"#333"}>List of Users</Heading>
       <ConfirmDeleteModal
         setDataState={setDataState}

@@ -20,6 +20,7 @@ function AddRecord() {
   const [error, setError] = useState("");
   const fNameRef = useRef();
   const lNameRef = useRef();
+  const birthdayRef = useRef();
   const idRef = useRef();
   const emailRef = useRef();
   const dispatch = useDispatch();
@@ -36,14 +37,46 @@ function AddRecord() {
 
   const handleForm = (e) => {
     e.preventDefault();
+    const date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    const bdate = birthdayRef.current.value;
+    let currentDate = `${+day <= 9 ? `0${day}` : day}/${
+      +month <= 9 ? `0${month}` : month
+    }/${year}`;
 
     if (
       fNameRef.current.value === "" ||
       lNameRef.current.value === "" ||
       idRef.current.value === "" ||
-      emailRef.current.value === ""
+      emailRef.current.value === "" ||
+      birthdayRef.current.value === ""
     ) {
       setError("Please fill all of the fields");
+      return;
+    }
+
+    if (birthdayRef.current.value.length !== 10) {
+      setError("Please enter a valid DOB");
+      return;
+    }
+
+    for (let i = 0; i < birthdayRef.current.value.length; i++) {
+      if (i === 2 || i === 5) {
+        if (birthdayRef.current.value[i] !== "/") {
+          setError("Please enter a valid DOB");
+          return;
+        }
+      }
+    }
+
+    if (
+      +currentDate.slice(0, 2) < +bdate.slice(0, 2) ||
+      +currentDate.slice(3, 5) < +bdate.slice(3, 5) ||
+      +currentDate.slice(6, 10) < +bdate.slice(6, 10)
+    ) {
+      setError("Please enter a valid DOB");
       return;
     }
 
@@ -60,6 +93,7 @@ function AddRecord() {
       last_name: lNameRef.current.value,
       id: idRef.current.value,
       email: emailRef.current.value,
+      birthday: birthdayRef.current.value,
     };
 
     dispatch(addUser(user));
@@ -84,13 +118,21 @@ function AddRecord() {
           </Alert>
         )}
         <Flex gap={3}>
-          <Flex mb={6} w={"50%"} flexDirection={"column"}>
+          <Flex mb={6} w={"39%"} flexDirection={"column"}>
             <FormLabel>First Name</FormLabel>
             <Input ref={fNameRef} placeholder="Jon" type={"text"}></Input>
           </Flex>
-          <Flex w={"50%"} flexDirection={"column"}>
+          <Flex w={"39%"} flexDirection={"column"}>
             <FormLabel>Last Name</FormLabel>
             <Input ref={lNameRef} placeholder="Doe" type={"text"}></Input>
+          </Flex>
+          <Flex w={"22%"} flexDirection={"column"}>
+            <FormLabel>DOB</FormLabel>
+            <Input
+              maxLength={"10"}
+              ref={birthdayRef}
+              placeholder="dd/mm/yyyy"
+              type={"text"}></Input>
           </Flex>
         </Flex>
         <Flex gap={3}>

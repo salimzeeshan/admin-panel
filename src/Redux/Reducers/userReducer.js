@@ -5,7 +5,7 @@ var data = axios
   .get("https://reqres.in/api/users?per_page=5")
   .then((response) => {
     response = response.data.data;
-    response = response.map((user) => ({ ...user, birthday: `${user.id}/02/2020` }));
+    response = response.map((user) => ({ ...user, birthday: `${user.id <= 9 ? `0${user.id}`: `${user.id}`}/03/2023` }));
     return response;
   });
 
