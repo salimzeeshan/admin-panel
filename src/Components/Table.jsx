@@ -21,6 +21,7 @@ function UserTable(user) {
       last_name: user.last_name,
       id: user.id,
       email: user.email,
+      birthday: user.birthday,
     };
     localStorage.setItem("currentDetails", JSON.stringify(data));
     navigate("/update");

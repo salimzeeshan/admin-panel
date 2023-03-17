@@ -18,10 +18,12 @@ function AddRecord() {
   const [error, setError] = useState("");
   const [defaultFName, setDefaultFName] = useState("");
   const [defaultLName, setDefaultLName] = useState("");
+  const [defaultDOB, setDefaultDOB] = useState("");
   const [defaultEmail, setDefaultEmail] = useState("");
   const [defaultID, setDefaultID] = useState("");
   const fNameRef = useRef();
   const lNameRef = useRef();
+  const birthdayRef = useRef();
   const idRef = useRef();
   const emailRef = useRef();
   const dispatch = useDispatch();
@@ -53,6 +55,7 @@ function AddRecord() {
       last_name: lNameRef.current.value,
       id: idRef.current.value,
       email: emailRef.current.value,
+      birthday: birthdayRef.current.value,
     };
 
     dispatch(updateUser(user));
@@ -61,11 +64,13 @@ function AddRecord() {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("currentDetails"));
-    const { first_name, last_name, email, id } = user;
+    const { first_name, last_name, email, id, birthday } = user;
     setDefaultFName(first_name);
     setDefaultLName(last_name);
     setDefaultEmail(email);
     setDefaultID(id);
+    setDefaultDOB(birthday);
+    console.log(user);
   }, []);
 
   return (
@@ -86,7 +91,7 @@ function AddRecord() {
           </Alert>
         )}
         <Flex gap={3}>
-          <Flex mb={6} w={"50%"} flexDirection={"column"}>
+          <Flex mb={6} w={"39%"} flexDirection={"column"}>
             <FormLabel>First Name</FormLabel>
             <Input
               defaultValue={defaultFName}
@@ -94,12 +99,21 @@ function AddRecord() {
               placeholder="Jon"
               type={"text"}></Input>
           </Flex>
-          <Flex w={"50%"} flexDirection={"column"}>
+          <Flex w={"39%"} flexDirection={"column"}>
             <FormLabel>Last Name</FormLabel>
             <Input
               defaultValue={defaultLName}
               ref={lNameRef}
               placeholder="Doe"
+              type={"text"}></Input>
+          </Flex>
+          <Flex w={"22%"} flexDirection={"column"}>
+            <FormLabel>DOB</FormLabel>
+            <Input
+              defaultValue={defaultDOB}
+              maxLength={"10"}
+              ref={birthdayRef}
+              placeholder="dd/mm/yyyy"
               type={"text"}></Input>
           </Flex>
         </Flex>
