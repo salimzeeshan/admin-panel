@@ -1,5 +1,5 @@
 
-# [Admin Panel](https://admin-steel-tau.vercel.app/login)
+# [Admin Panel](https://admin-steel-tau.vercel.app/)
 
 A basic admin panel made with react which supports Authentication as well as CRUD operations.
 
@@ -17,7 +17,7 @@ A basic admin panel made with react which supports Authentication as well as CRU
 Clone the project
 
 ```bash
-  git clone https://github.com/salimzeeshan/assignment-1.git
+  git clone https://github.com/salimzeeshan/admin-panel.git
 ```
 
 Install dependencies
