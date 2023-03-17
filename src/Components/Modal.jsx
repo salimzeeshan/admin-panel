@@ -27,8 +27,6 @@ function UserModal(modal) {
             <strong>Email:</strong> {modal.email}
           </Text>
         </ModalBody>
-
-        {/* <ModalFooter></ModalFooter> */}
       </ModalContent>
     </Modal>
   );

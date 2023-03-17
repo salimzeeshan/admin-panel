@@ -44,7 +44,6 @@ function Login() {
       ) {
         setError("");
         dispatch(loginUser());
-        console.log(store.getState().authReducer);
         navigate("/");
         return;
       }

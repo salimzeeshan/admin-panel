@@ -44,7 +44,6 @@ function Home() {
       if (user.birthday === currentDate) {
         const birthdayList = [...birthday];
         birthdayList.push(user);
-        console.log(birthdayList);
         setBirthday(birthdayList);
       }
     });

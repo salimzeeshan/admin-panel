@@ -48,7 +48,6 @@ const rootReducer = combineReducers({
 
 const updateUser = async (state, user) => {
   var response = await state;
-  console.log(user);
   for (let i = 0; i < response.length; i++) {
     if (user.id == response[i].id) {
       var old_user = response[i];
