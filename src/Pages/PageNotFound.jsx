@@ -1,9 +1,13 @@
 import { Box, Heading, Text, Button, Center } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function PageNotFound() {
   return (
     <Center h={"100dvh"}>
+            <Helmet>
+        <title>Page Not Found</title>
+      </Helmet>
       <Box textAlign="center" py={10} px={6}>
         <Heading
           display="inline-block"

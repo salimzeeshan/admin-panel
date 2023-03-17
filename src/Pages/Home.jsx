@@ -16,6 +16,7 @@ import UserModal from "../Components/Modal";
 import { useDispatch } from "react-redux";
 import ConfirmDeleteModal from "../Components/ConfirmDelete";
 import Notification from "../Components/Notification.jsx";
+import { Helmet } from "react-helmet";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -62,9 +63,10 @@ function Home() {
       flexDir={"column"}
       w={"100%"}
       mt={12}>
-      <Notification
-        birthday = {birthday}
-      />
+      <Notification birthday={birthday} />
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <Heading color={"#333"}>List of Users</Heading>
       <ConfirmDeleteModal
         setDataState={setDataState}

@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addUser } from "../Redux/Actions/actions";
 import store from "../Redux/store";
+import { Helmet } from "react-helmet";
 
 function AddRecord() {
   const [lastID, setLastID] = useState(0);
@@ -72,9 +73,24 @@ function AddRecord() {
     }
 
     if (
-      +currentDate.slice(0, 2) < +bdate.slice(0, 2) ||
-      +currentDate.slice(3, 5) < +bdate.slice(3, 5) ||
-      +currentDate.slice(6, 10) < +bdate.slice(6, 10)
+      +currentDate.slice(6, 10) < +bdate.slice(6, 10) ||
+      +bdate.slice(3, 5) > 12
+    ) {
+      setError("Please enter a valid DOB");
+      return;
+    }
+
+    if (
+      +currentDate.slice(6, 10) == +bdate.slice(6, 10) &&
+      +currentDate.slice(3, 5) < +bdate.slice(3, 5)
+    ) {
+      setError("Please enter a valid DOB");
+      return;
+    }
+
+    if (
+      +currentDate.slice(6, 10) == +bdate.slice(6, 10) &&
+      +currentDate.slice(0, 2) < +bdate.slice(0, 2)
     ) {
       setError("Please enter a valid DOB");
       return;
@@ -109,6 +125,9 @@ function AddRecord() {
       justifyContent={"center"}
       px={"30px"}
       maxW={"700px"}>
+      <Helmet>
+        <title>Add User</title>
+      </Helmet>
       <Heading color={"#333"}>Add New User</Heading>
       <FormControl>
         {error === "" ? null : (

@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function Signup() {
   const emailRef = useRef();
@@ -71,6 +72,9 @@ function Signup() {
 
   return (
     <Center h={"100dvh"} px={"30px"} gap={12} flexDir={"column"} w={"100%"}>
+            <Helmet>
+        <title>Signup</title>
+      </Helmet>
       <Heading color={"#333"}>Create an Account</Heading>
       <Flex
         maxW={"500px"}

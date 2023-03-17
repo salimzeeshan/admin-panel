@@ -13,7 +13,7 @@ import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../Redux/Actions/actions";
-import store from "../Redux/store";
+import { Helmet } from "react-helmet";
 
 function Login() {
   const emailRef = useRef();
@@ -54,6 +54,9 @@ function Login() {
 
   return (
     <Center h={"100dvh"} px={"30px"} gap={12} flexDir={"column"} w={"100%"}>
+            <Helmet>
+        <title>Login</title>
+      </Helmet>
       <Heading color={"#333"}>Sign In as Admin</Heading>
       <Flex
         maxW={"500px"}
