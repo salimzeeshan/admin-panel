@@ -1,16 +1,10 @@
-import axios from "axios";
 import { combineReducers } from "redux";
+const initialState = [];
 
-var data = axios
-  .get("https://reqres.in/api/users?per_page=5")
-  .then((response) => {
-    response = response.data.data;
-    response = response.map((user) => ({ ...user, birthday: `${user.id <= 9 ? `0${user.id}`: `${user.id}`}/03/2023` }));
-    return response;
-  });
-
-const userReducer = (state = data, action) => {
+const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "FETCH":
+      return action.payload;
     case "ADD":
       var user = action.payload;
       var new_state = addUser(state, user);

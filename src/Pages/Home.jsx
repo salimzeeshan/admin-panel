@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import ConfirmDeleteModal from "../Components/ConfirmDelete";
 import Notification from "../Components/Notification.jsx";
 import { Helmet } from "react-helmet";
+import { fetchUsers } from "../Redux/Actions/actions";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -51,8 +52,14 @@ function Home() {
     setData(response);
   }
 
+  async function fetchData() {
+    await dispatch(fetchUsers());
+    const response = await store.getState().userReducer;
+    setData(response);
+  }
+
   useEffect(() => {
-    getData();
+    fetchData();
   }, [dataState]);
 
   return (
