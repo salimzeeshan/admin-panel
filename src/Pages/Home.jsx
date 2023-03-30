@@ -32,9 +32,9 @@ function Home() {
   const dispatch = useDispatch();
   const [birthday, setBirthday] = useState([]);
 
-  async function getData() {
+  async function fetchData() {
+    await dispatch(fetchUsers());
     const response = await store.getState().userReducer;
-    const date = new Date();
 
     let day = date.getDate();
     let month = date.getMonth() + 1;
@@ -49,12 +49,7 @@ function Home() {
         setBirthday(birthdayList);
       }
     });
-    setData(response);
-  }
 
-  async function fetchData() {
-    await dispatch(fetchUsers());
-    const response = await store.getState().userReducer;
     setData(response);
   }
 
