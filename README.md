@@ -38,3 +38,4 @@ Start the server
 **Client:** React, Redux, JavaScript
 
 **Database:** Local Storage
+

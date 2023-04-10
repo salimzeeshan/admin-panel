@@ -4,8 +4,12 @@ export const fetchUsers = () => async (dispatch, getState) => {
   const response = getState().userReducer;
 
   if (response.length === 0) {
-    const response = await axios.get("https://reqres.in/api/users?per_page=5");
-    dispatch({ type: "FETCH", payload: response.data.data });
+    let response = await axios.get("https://reqres.in/api/users?per_page=5");
+    response = response.data.data.map((user) => ({
+      ...user,
+      birthday: `${user.id <= 9 ? `0${user.id}` : `${user.id}`}/03/2023`,
+    }));
+    dispatch({ type: "FETCH", payload: response });
   }
 };
 
