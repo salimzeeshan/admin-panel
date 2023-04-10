@@ -67,6 +67,7 @@ const deleteUser = async (state, id) => {
   var new_data = response.filter((user) => {
     return user.id != id;
   });
+  console.log(new_data)
   return new_data;
 };
 

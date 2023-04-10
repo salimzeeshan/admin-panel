@@ -1,8 +1,12 @@
 import axios from "axios";
 
-export const fetchUsers = () => async (dispatch) => {
-  const response = await axios.get("https://reqres.in/api/users?per_page=5");
-  dispatch({ type: "FETCH", payload: response.data.data });
+export const fetchUsers = () => async (dispatch, getState) => {
+  const response = getState().userReducer;
+
+  if (response.length === 0) {
+    const response = await axios.get("https://reqres.in/api/users?per_page=5");
+    dispatch({ type: "FETCH", payload: response.data.data });
+  }
 };
 
 export const addUser = (user) => {

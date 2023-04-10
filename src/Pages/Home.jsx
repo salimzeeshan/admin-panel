@@ -33,8 +33,10 @@ function Home() {
   const [birthday, setBirthday] = useState([]);
 
   async function fetchData() {
-    await dispatch(fetchUsers());
     const response = await store.getState().userReducer;
+    setData(response);
+
+    const date = new Date();
 
     let day = date.getDate();
     let month = date.getMonth() + 1;
@@ -49,13 +51,22 @@ function Home() {
         setBirthday(birthdayList);
       }
     });
+  }
 
+  async function getInitialData() {
+    await dispatch(fetchUsers());
+    const response = await store.getState().userReducer;
     setData(response);
+    setDataState(!dataState);
   }
 
   useEffect(() => {
+    getInitialData();
+  }, []);
+
+  useEffect(() => {
     fetchData();
-  }, [dataState]);
+  }, [dataState, data]);
 
   return (
     <Center
