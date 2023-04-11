@@ -35,7 +35,7 @@ Start the server
 
 ## Tech Stack
 
-**Client:** React, Redux, JavaScript
+**Client:** React, Redux, Thunk, JavaScript
 
 **Database:** Local Storage
 
